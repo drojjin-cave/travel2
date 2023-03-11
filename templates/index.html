@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{{super()}}
+<!--Блок верхней шапки-->
+<div class="container">
+<div class="img__container">
+  <img src="static/img/main/header.jpg" class="image img_wrap" alt="Описание изображения...">
+  <div class="img__description">
+    <h1 class=" display-6 fst-italic">Добро пожаловать в мир путешествий!</h1>
+    <p class="lead my-1">Множественные строки текста, которые образуют ленту, быстро<br> и эффективно информируют новых читателей о том, что наиболее интересно в содержании этого сообщения.</p>
+  </div>
+</div>
+</div>
+
+
+<!--Новости и статьи пользователей-->
+<div class="container">
+    <p>
+ <div class="row g-2">
+    <div class="col-md-8">
+      <div class="row">
+        <article id="blog"><div class="col-12"><h2 class="pb-2 mb-2 border-bottom display-6">Записи в блоге</h2></div></article>
+        <div class="col"></div>
+        <div class="col"></div>
+        <div class="col">
+        </div>
+        <div class="col">
+          {% if current_user.is_authenticated %}
+            <a href="news" class="btn btn-secondary">Добавить новость</a>
+            {% endif %}
+        </div>
+      </div>
+
+        {% for i in range(count_news - 1, -1, -1) %}
+        <div class="col-md8 ">
+          <h2 class="blog-post-title">{{news[i].title}}</h2>
+          <div class="row">
+            <div class="col">
+              <p class="text"><small class="text-muted ">{{news[i].date.date().strftime(news[i].my_format_data)}} года {{news[i].user.name}}</small></p>
+            </div>
+            <div class="col">
+              <p class="text-end"><small class="text-muted ">Время публикации - {{news[i].date.time().strftime(news[i].time_format)}} </small></p>
+            </div>
+            </div>
+            <div>
+              <p>
+                {% if news[i].img %}
+                <div class="row">
+                  <div class="col"><img src="../static/uploads/{{news[i].img}}" class="img-thumbnail" alt="..." width="300"></div>
+                  <div class="col"><p class="lead ">{{news[i].content}}</p></div>
+                </div>
+                {% else %}
+              <p class="lead">{{news[i].content}}</p>
+                 {% endif %}
+            </div>
+          <br>
+            {% if current_user.is_authenticated %}
+              {% if current_user == news[i].user or users.filter(User.id == current_user.id).first().role  == 'admin' %}
+  <!--          доделать возможность админу удалять и редактировать-->
+              <div>
+                <a href="/news/{{ news[i].id }}" class="btn btn-warning">Изменить</a>
+                <a href="/news_delete/{{ news[i].id }}" class="btn btn-danger">Удалить</a>
+              </div>
+
+              {% endif %}
+            {% endif %}
+         </div>
+        <hr>
+
+        {% endfor %}
+
+
+
+
+
+      <nav class="blog-pagination" aria-label="Pagination">
+        <a class="btn btn-outline-primary" href="#">Наверх</a>
+      </nav>
+
+    </div>
+
+    <div class="col-md-4">
+      <div class="position-sticky" style="top: 2rem;">
+        <div class="p-4 mb-3 bg-light rounded">
+          <h4 class="fst-italic">О нас</h4>
+          <p class="mb-2">
+            Рады приветствовать Вас на нашем портале про путешествия.
+            Делитесь с читателями своими интересными историями и фотографиями!
+            <p class="text-muted">Зарегистрируйтесь и делитесь эмоциями!</p>
+
+            <p class="text-end"><figure class="text-end">
+              <blockquote class="blockquote">
+                <p>Сила природы велика</p>
+              </blockquote>
+              <figcaption class="blockquote-footer">
+                Цицерон
+              </figcaption>
+            </figure></p>
+          </p>
+        </div>
+
+        <div class="p-4">
+          <h4 class="fst-italic">Архивы</h4>
+          <ol class="list-unstyled mb-0">
+            <li><a href="/archiv">Март 2023</a></li>
+            <li><a href="/archiv_not">Февраль 2023</a></li>
+            <li><a href="/archiv_not">Январь 2023</a></li>
+            <li><a href="/archiv_not">Декабрь 2022</a></li>
+            <li><a href="/archiv_not">Ноябрь 2022</a></li>
+            <li><a href="/archiv_not">Октябрь 2022</a></li>
+            <li><a href="/archiv_not">Сентябрь 2022</a></li>
+          </ol>
+        </div>
+
+        <div class="p-4">
+          <h4 class="fst-italic">Интересные ресурсы</h4>
+          <ol class="list-unstyled">
+            <li><a href="https://miridei.com/idei-puteshestvii/puteshestvenniku-na-zametku/20_sovetov_dlya_turistov_kotorye_vpervye_sobirayutsya_zagranitsu/" target="_blank">Советы для тех, кто собирается за границу</a></li>
+            <li><a href="https://mygeografi.ru/kak-pravilno-sobratsya-v-poxod-sovety" target="_blank">Как собраться в пешеходный поход</a></li>
+            <li><a href="https://www.vpoxod.ru/page/toponym/sibir_info" target="_blank">Природа сибири</a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

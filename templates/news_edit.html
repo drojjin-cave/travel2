@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>Редактирование статьи</h1>
+    <br>
+    <form method="POST" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.title.label() }}<br>
+            {{ form.title(class="form-control") }}<br>
+
+        </p>
+        <p>
+           {{ form.content.label() }}
+            {{ form.content(class="form-control ") }}
+        </p>
+        {% if not file %}
+        <div class="row pb-0">
+            <div class="col"><h6 class="display-6">Загрузите обложку статьи</h6></div>
+        </div>
+        <div class="row pb-2">
+            <div class="col"><h6 class="display-6" >{{ form.photo(class="lead") }}</h6></div>
+        </div>
+        <p>{{ form.add(type="submit", class="btn btn-success") }}</p>
+        {% else %}
+        <div class="row">
+            <div class="col">{{ form.add(type="submit", class="btn btn-success") }}</div>
+            <div class="col">{{form.delete_foto(type="submit", class="btn btn-danger")}}</div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+
+        </div>
+        {% endif %}
+
+
+
+
+
+    </form>
+</div>
+{% endblock %}

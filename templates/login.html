@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{{ super() }}
+{% block content %}
+<div class="container">
+        {% for cat, msg in get_flashed_messages(True) %}
+    <div class="flash {{cat}}">{{msg}}</div>
+        {% endfor %}
+    </div>
+    <h1 class=" display-6 fw-bold lh-1 mb-3 text-center">Авторизация</h1>
+    <div class="row">
+        <div class="col"></div>
+        <div class="col"></div>
+        <div class="col">
+            <form action="/login" method="post" class="form-contact p-4 p-md-5 border rounded-3 bg-light">
+            <p>{{ form.hidden_tag() }}
+            <p>{{ form.email.label() }} {{ form.email() }}
+            <p>{{ form.password.label() }} {{ form.password() }}
+            <p>{{ form.remember.label() }} {{ form.remember() }}
+            <p>{{ form.submit(class="btn btn-primary") }}
+            <hr align=left width="300px">
+            <p><a href="{{url_for('register')}}" class="nav-link link-dark px-2">Регистрация</a>
+            </form>
+
+
+        </div>
+        <div class="col"></div>
+        <div class="col"></div>
+    </div>
+
+
+
+
+
+
+
+</div>
+
+{% endblock %}

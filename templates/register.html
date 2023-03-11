@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+{{super()}}
+<div class="container">
+
+    {{ super() }}
+    {% for cat, msg in get_flashed_messages(True) %}
+    <div class="flash {{cat}}">{{msg}}</div>
+    {% endfor %}
+    <h1 class=" display-6 fw-bold lh-1 mb-3 text-center">Регистрация</h1>
+    <div class="row">
+        <div class="col"></div>
+        <div class="col"></div>
+        <div class="col-5">
+            <form action="/register" method="POST" class="form-contact p-2 p-md-5 border rounded-3 bg-light">
+                {{ form.hidden_tag() }}
+                <div class="row">
+                    <div class="col pb-2">{{ form.name.label() }}</div>
+                    <div class="col pb-2">{{ form.name() }}</div>
+                </div>
+                <div class="row">
+                    <div class="col pb-2">{{ form.old.label() }}</div>
+                    <div class="col pb-2">{{ form.old() }}</div>
+                </div>
+                <div class="row">
+                    <div class="col pb-2">{{ form.city.label() }}</div>
+                    <div class="col pb-2">{{ form.city() }}</div>
+                </div>
+                <div class="row">
+                    <div class="col pb-2">{{ form.email.label() }}</div>
+                    <div class="col pb-2">{{ form.email() }}</div>
+                </div>
+                <div class="row">
+                    <div class="col pb-2">{{ form.password.label() }}</div>
+                    <div class="col pb-2">{{ form.password() }}</div>
+                </div>
+                <div class="row">
+                    <div class="col pb-2">{{ form.password_again.label() }}</div>
+                    <div class="col pb-4">{{ form.password_again() }}</div>
+                </div>
+                {{ form.register(class="btn btn-primary") }}
+                <hr class="my-4">
+                <small class="text-muted">Нажимая «Зарегистрироваться», вы соглашаетесь с условиями использования.</small>
+            </form>
+        </div>
+        <div class="col"></div>
+        <div class="col"></div>
+    </div>
+
+</div>
+
+
+
+
+
+{% endblock %}

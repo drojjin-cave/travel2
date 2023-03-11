@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{{super()}}
+
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="/add_modal_news">Добавить новость</button>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@fat">Изменить новость</button>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Добавление/редактирование новости</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Заголовок:</label>
+            {{ form.title(class="form-control") }}
+          </div>
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">Содержание:</label>
+            {{ form.content(class="form-control") }}
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+        {{ form.submit(type="submit", class="btn btn-primary") }}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

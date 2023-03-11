@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{{super()}}
+<div class="container">
+<div class="img__container">
+  <img src="static/img/main/header.jpg" class="image img_wrap" alt="Описание изображения...">
+  <div class="img__description">
+    <h1 class=" display-6 fst-italic">Заголовок более подробного сообщения в блоге</h1>
+    <p class="lead my-1">Множественные строки текста, которые образуют ленту, быстро<br> и эффективно информируют новых читателей о том, что наиболее интересно в содержании этого сообщения.</p>
+  </div>
+</div>
+</div>
+{% endblock %}

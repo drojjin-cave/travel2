@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{{super()}}
+
+<div class="container">
+<div class="col-md-12">
+      <div class="row">
+        <div class="col-12"><h2 class="pb-2 mb-2 border-bottom display-6">Март 2023</h2></div>
+        <div class="col"></div>
+        <div class="col"></div>
+        <div class="col">
+        </div>
+        <div class="col">
+          {% if current_user.is_authenticated %}
+            <a href="news" class="btn btn-secondary">Добавить новость</a>
+            {% endif %}
+        </div>
+      </div>
+
+        {% for i in range(count_news - 1, -1, -1) %}
+        <div class="col-md8 ">
+          <h2 class="blog-post-title">{{news[i].title}}</h2>
+          <div class="row">
+            <div class="col">
+              <p class="text"><small class="text-muted ">{{news[i].date.date().strftime(news[i].my_format_data)}} года {{news[i].user.name}}</small></p>
+            </div>
+            <div class="col">
+              <p class="text-end"><small class="text-muted ">Время публикации {{news[i].date.time().strftime(news[i].time_format)}} </small></p>
+            </div>
+            </div>
+            <div>
+              <p>
+                {% if news[i].img %}
+                <div class="row">
+                  <div class="col"><img src="../static/uploads/{{news[i].img}}" class="img-thumbnail" alt="..." width="300"></div>
+                  <div class="col"><p class="lead ">{{news[i].content}}</p></div>
+                </div>
+                {% else %}
+              <p class="lead">{{news[i].content}}</p>
+                 {% endif %}
+            </div>
+          <br>
+
+            {% if current_user.is_authenticated and current_user == news[i].user %}
+            <div>
+              <a href="/news/{{ news[i].id }}" class="btn btn-warning">Изменить</a>
+              <a href="/news_delete/{{ news[i].id }}" class="btn btn-danger">Удалить</a>
+            </div>
+            {% endif %}
+         </div>
+        <hr>
+
+        {% endfor %}
+
+
+
+
+
+      <nav class="blog-pagination" aria-label="Pagination">
+        <a class="btn btn-outline-primary" href="#">Наверх</a>
+      </nav>
+
+    </div>
+</div>
+
+{% endblock %}
